@@ -39,4 +39,16 @@ sudo poweroff
 # 3) Database name: nvs, Database username: nvs, Database password: nuvasuparati
 # 4) Site e-mail address: your email
 
+# Install Drush
+# Install old version - 4.5
+sudo apt-get install -y drush
+# Install new version - 5.8
+sudo drush dl drush --destination='/usr/share'
+
+# Install Drupal modules
+drush dl admin_menu ctools devel email entityreference field_permissions simplehtmldom imce backup_migrate entity module_filter token relation relation_endpoint relation_ui taxonomy_csv imce_wysiwyg ulogin wysiwyg views views_ui
+# Enable modules
+drush en -y admin_menu ctools devel email entityreference field_permissions simplehtmldom imce backup_migrate entity module_filter token relation relation_endpoint relation_ui taxonomy_csv imce_wysiwyg ulogin wysiwyg views views_ui
+# Disable Drupal modules
+drush dis -y overlay shortcut toolbar
 
