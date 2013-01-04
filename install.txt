@@ -1,0 +1,42 @@
+# Apache and Mysql already installed
+
+# Install Drupal on Ubuntu ()
+cd ~/
+wget  http://ftp.drupal.org/files/projects/drupal-7.18.tar.gz
+tar zxvf drupal-7.18.tar.gz
+sudo mv drupal-7.18/* /var/www/
+
+# Cleanup 
+rm -rf ~/drupal-7.18
+rm -rf ~/drupal-7.18.tar.gz
+rm -rf /var/www/index.html
+
+# Configure Drupal and set permissions
+cd /var/www/
+cp sites/default/default.settings.php sites/default/settings.php
+chmod a+w sites/default
+sudo chown nvs:www-data sites/default/settings.php
+
+# Configure database
+mysql -u root -p
+
+CREATE DATABASE nvs;
+CREATE USER nvs@localhost;
+SET PASSWORD FOR nvs@localhost= PASSWORD("nuvasuparati");
+GRANT ALL PRIVILEGES ON nvs.* TO nvs@localhost IDENTIFIED BY 'nuvasuparati';
+FLUSH PRIVILEGES;
+exit
+
+# Install specific PHP module required by Drupal
+sudo apt-get install -y php5-gd
+
+# Reboot system
+sudo poweroff
+
+# Web UI Drupal Instalation
+# 1) navigate with browser to http://localhost/install.php
+# 2) Select Standard, English
+# 3) Database name: nvs, Database username: nvs, Database password: nuvasuparati
+# 4) Site e-mail address: your email
+
+
